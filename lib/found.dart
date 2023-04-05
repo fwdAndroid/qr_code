@@ -92,12 +92,89 @@ class _FoundState extends State<Found> {
     });
     if (response.statusCode == 200) {
       if (codeController.text.isNotEmpty) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (builder) => NoFound(
-                      response: response.body,
-                    )));
+        String mainString = response.body;
+        int pos = mainString.indexOf("nakli");
+        if (pos == mainString.indexOf("nakli")) {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                    "OOP's",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  content: Container(
+                    height: 300,
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/wrong.png"),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          response.body,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => NoFound(
+                                        response: response.body,
+                                      )));
+                        },
+                        child: Text("OK"))
+                  ],
+                );
+              });
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                    "Congratulations",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  content: Container(
+                    height: 300,
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/check.png"),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          response.body,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => NoFound(
+                                        response: response.body,
+                                      )));
+                        },
+                        child: Text("OK"))
+                  ],
+                );
+              });
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("No Code Found: Code is Required")));

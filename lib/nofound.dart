@@ -64,27 +64,6 @@ class _NoFoundState extends State<NoFound> {
               ),
             ),
           ),
-          Center(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, fixedSize: Size(150, 30)),
-              onPressed: () {
-                String mainString = widget.response;
-                int pos = mainString.indexOf("nakli");
-                if (pos == mainString.indexOf("assdsadasd ncb")) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("asd")));
-                } else {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("asdss")));
-                }
-              },
-              child: const Text(
-                'Go Back',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
         ],
       ),
     );
