@@ -91,7 +91,6 @@ class _FoundState extends State<Found> {
       _isLoading = false;
     });
     if (response.statusCode == 200) {
-      print(response.body);
       if (codeController.text.isNotEmpty) {
         Navigator.push(
             context,
