@@ -94,86 +94,85 @@ class _FoundState extends State<Found> {
       if (codeController.text.isNotEmpty) {
         String mainString = response.body;
         int pos = mainString.indexOf("nakli");
+        int post = mainString.indexOf("asli");
         if (pos == mainString.indexOf("nakli")) {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    "OOP's",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  content: Container(
-                    height: 300,
-                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/wrong.png"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("OOP'S"),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Image.asset("assets/wrong.png"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: Text(
                           response.body,
                           textAlign: TextAlign.center,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => NoFound(
-                                        response: response.body,
-                                      )));
-                        },
-                        child: Text("OK"))
-                  ],
-                );
-              });
-        } else {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    "Congratulations",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  content: Container(
-                    height: 300,
-                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/check.png"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
+                ),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => NoFound(
+                                      response: response.body,
+                                    )));
+                      },
+                      child: Text("OK"))
+                ],
+              );
+            },
+          );
+        } else if (post == mainString.indexOf("asli")) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Success"),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Image.asset("assets/check.png"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: Text(
                           response.body,
                           textAlign: TextAlign.center,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => NoFound(
-                                        response: response.body,
-                                      )));
-                        },
-                        child: Text("OK"))
-                  ],
-                );
-              });
+                ),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => NoFound(
+                                      response: response.body,
+                                    )));
+                      },
+                      child: Text("OK"))
+                ],
+              );
+            },
+          );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

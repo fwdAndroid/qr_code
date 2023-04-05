@@ -28,11 +28,30 @@ class _NoFoundState extends State<NoFound> {
               height: 200,
             ),
           ),
-          Text(
-            widget.response,
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
-            textAlign: TextAlign.center,
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20),
+            child: Text(
+              "*Welcome to Faiza Beauty Cream Product Authentication System* Result of your search is: بھیجے ہوے کوڈ کا رزلٹ یہ ہے ,",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20),
+            child: Text(
+              widget.response,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+              textAlign: TextAlign.justify,
+            ),
           ),
           SizedBox(
             height: 10,
