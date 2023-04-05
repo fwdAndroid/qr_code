@@ -24,22 +24,22 @@ class _FoundState extends State<Found> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  "Search Result: ",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Center(
-                child: Text(widget.result),
-              ),
-            ],
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+              margin: EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: Text(
+                "Enter Code",
+                textAlign: TextAlign.start,
+              )),
+          Container(
+            margin: EdgeInsets.only(top: 5, left: 20, right: 20),
+            child: TextField(
+              controller: codeController,
+              keyboardType: TextInputType.number,
+              obscureText: false,
+            ),
           ),
           SizedBox(
             height: 20,
@@ -54,23 +54,6 @@ class _FoundState extends State<Found> {
             margin: EdgeInsets.only(top: 5, left: 20, right: 20),
             child: TextField(
               controller: phoneController,
-              keyboardType: TextInputType.number,
-              obscureText: false,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-              margin: EdgeInsets.only(top: 5, left: 20, right: 20),
-              child: Text(
-                "Enter Code",
-                textAlign: TextAlign.start,
-              )),
-          Container(
-            margin: EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              controller: codeController,
               keyboardType: TextInputType.number,
               obscureText: false,
             ),
@@ -109,12 +92,17 @@ class _FoundState extends State<Found> {
     });
     if (response.statusCode == 200) {
       print(response.body);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (builder) => NoFound(
-                    response: response.body,
-                  )));
+      if (codeController.text.isNotEmpty) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (builder) => NoFound(
+                      response: response.body,
+                    )));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("No Code Found: Code is Required")));
+      }
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
