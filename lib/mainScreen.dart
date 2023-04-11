@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset("assets/splash.png"),
+            Image.asset("assets/logo.png"),
             ElevatedButton(
               onPressed: () async {
                 _qrBarCodeScannerDialogPlugin.getScannedQrBarCode(

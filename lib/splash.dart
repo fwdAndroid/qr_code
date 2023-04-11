@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Image.asset("assets/splash.png")],
+        children: [Image.asset("assets/logo.png")],
       ),
     );
   }

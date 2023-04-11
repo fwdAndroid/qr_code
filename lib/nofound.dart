@@ -30,7 +30,7 @@ class _NoFoundState extends State<NoFound> {
         children: [
           Center(
             child: Image.asset(
-              "assets/splash.png",
+              "assets/logo.png",
               height: 200,
             ),
           ),

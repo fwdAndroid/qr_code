@@ -24,7 +24,7 @@ class _ResultPageState extends State<ResultPage> {
         children: [
           Center(
               child: Image.asset(
-            "assets/splash.png",
+            "assets/logo.png",
           )),
           SizedBox(
             height: 20,
