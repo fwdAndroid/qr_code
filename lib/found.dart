@@ -84,7 +84,7 @@ class _FoundState extends State<Found> {
       _isLoading = true;
     });
     final url = Uri.parse(
-        'https://www.ecofbc.com/index.php/fbc/whatsapp_authenticate_scratch_code/${phoneController.text}/${codeController.text}');
+        'https://www.ecofbc.com/index.php/fbc/whatsapp_authenticate_scratch_code/${phoneController.text}/${codeController.text}/forvil');
 
     final response = await http.get(url);
     setState(() {
@@ -126,6 +126,7 @@ class _FoundState extends State<Found> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => NoFound(
+                                      result: widget.result,
                                       response: response.body,
                                     )));
                       },
@@ -165,6 +166,7 @@ class _FoundState extends State<Found> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => NoFound(
+                                      result: widget.result,
                                       response: response.body,
                                     )));
                       },

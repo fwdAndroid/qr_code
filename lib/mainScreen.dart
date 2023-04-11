@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:qr_bar_code_scanner_dialog/qr_bar_code_scanner_dialog.dart';
 import 'package:qr_code/found.dart';
 import 'package:qr_code/resultpage.dart';
-import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -29,13 +28,13 @@ class _MainScreenState extends State<MainScreen> {
                     context: context,
                     onCode: (code) {
                       setState(() {
-                        this.result = "https://forvilcosmetic.com";
+                        this.result = code;
                       });
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (builder) => Found(
-                                    result: result!,
+                                    result: code!,
                                   )));
                     });
               },

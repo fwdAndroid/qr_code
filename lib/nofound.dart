@@ -1,20 +1,26 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:http/http.dart' as http;
 import 'package:qr_code/mainScreen.dart';
 
 class NoFound extends StatefulWidget {
   var response;
-  NoFound({
-    super.key,
-    required this.response,
-  });
+  var result;
+  NoFound({super.key, required this.response, required this.result});
 
   @override
   State<NoFound> createState() => _NoFoundState();
 }
 
 class _NoFoundState extends State<NoFound> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(widget.result);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,10 +79,7 @@ class _NoFoundState extends State<NoFound> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, fixedSize: Size(150, 30)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => MainScreen()));
-              },
+              onPressed: apiPostCall,
               child: const Text(
                 'Go Back',
                 style: TextStyle(color: Colors.white),
@@ -86,5 +89,34 @@ class _NoFoundState extends State<NoFound> {
         ],
       ),
     );
+  }
+
+  void apiPostCall() async {
+    final String url =
+        "http://ecofbc.com/index.php/fbc/process_image/${widget.result}";
+    final Map<String, String> headers = {
+      'Authorization': 'Bearer mytoken',
+      'Content-Type': 'application/json',
+    };
+    final String body = '{"image": ${widget.result}}';
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+
+    if (response.statusCode == 200) {
+      // Successful response
+      print(response.body);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Congurations")));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+    } else {
+      // Error in response
+      print("Error: ${response.statusCode} - ${response.body}");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Congurations")));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+    }
   }
 }
