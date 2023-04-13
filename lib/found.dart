@@ -5,9 +5,7 @@ import 'package:qr_code/nofound.dart';
 import 'package:http/http.dart' as http;
 
 class Found extends StatefulWidget {
-  String result;
-
-  Found({super.key, required this.result});
+  Found({super.key});
 
   @override
   State<Found> createState() => _FoundState();
@@ -126,7 +124,6 @@ class _FoundState extends State<Found> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => NoFound(
-                                      result: widget.result,
                                       response: response.body,
                                     )));
                       },
@@ -166,7 +163,6 @@ class _FoundState extends State<Found> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => NoFound(
-                                      result: widget.result,
                                       response: response.body,
                                     )));
                       },
