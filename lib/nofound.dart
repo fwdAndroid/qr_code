@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_code/mainScreen.dart';
+import 'package:qr_code/splash.dart';
 
 class NoFound extends StatefulWidget {
   var response;
@@ -80,9 +82,12 @@ class _NoFoundState extends State<NoFound> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, fixedSize: Size(150, 30)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (builder) => Splash()));
+              },
               child: const Text(
-                'Go Back',
+                'Return To Home Page',
                 style: TextStyle(color: Colors.white),
               ),
             ),
