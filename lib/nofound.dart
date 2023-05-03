@@ -43,7 +43,7 @@ class _NoFoundState extends State<NoFound> {
           Container(
             margin: EdgeInsets.only(left: 20, right: 20),
             child: Text(
-              "*Welcome to Faiza Beauty Cream Product Authentication System* Result of your search is: بھیجے ہوے کوڈ کا رزلٹ یہ ہے ,",
+              widget.response,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),

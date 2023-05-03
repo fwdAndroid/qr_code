@@ -5,7 +5,8 @@ import 'package:qr_code/nofound.dart';
 import 'package:http/http.dart' as http;
 
 class Found extends StatefulWidget {
-  Found({super.key});
+  final response;
+  Found({super.key, required this.response});
 
   @override
   State<Found> createState() => _FoundState();
