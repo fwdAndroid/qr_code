@@ -1,17 +1,18 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_code/mainScreen.dart';
 import 'package:qr_code/splash.dart';
 
 class NoFound extends StatefulWidget {
   var response;
-  NoFound({
-    super.key,
-    required this.response,
-  });
+  var phoneController;
+  NoFound({super.key, required this.response, required this.phoneController});
 
   @override
   State<NoFound> createState() => _NoFoundState();
@@ -22,6 +23,34 @@ class _NoFoundState extends State<NoFound> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _deviceDetails();
+  }
+
+  String deviceName = '';
+  String deviceVersion = '';
+  String identifier = '';
+  Future<void> _deviceDetails() async {
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    try {
+      if (Platform.isAndroid) {
+        var build = await deviceInfoPlugin.androidInfo;
+        setState(() {
+          deviceName = build.model;
+          deviceVersion = build.model;
+          identifier = build.supportedAbis.first;
+        });
+        //UUID for Android
+      } else if (Platform.isIOS) {
+        var data = await deviceInfoPlugin.iosInfo;
+        setState(() {
+          deviceName = data.name;
+          deviceVersion = data.isPhysicalDevice.toString();
+          identifier = data.identifierForVendor!;
+        }); //UUID for iOS
+      }
+    } on PlatformException {
+      print('Failed to get platform version');
+    }
   }
 
   @override
@@ -43,7 +72,7 @@ class _NoFoundState extends State<NoFound> {
           Container(
             margin: EdgeInsets.only(left: 20, right: 20),
             child: Text(
-              widget.response,
+              widget.phoneController,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
@@ -87,7 +116,7 @@ class _NoFoundState extends State<NoFound> {
                     context, MaterialPageRoute(builder: (builder) => Splash()));
               },
               child: const Text(
-                'Return To Home Page',
+                'Home Page',
                 style: TextStyle(color: Colors.white),
               ),
             ),
