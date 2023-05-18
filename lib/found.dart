@@ -198,91 +198,58 @@ class _FoundState extends State<Found> {
       setState(() {
         _isLoading = false;
       });
+
       if (response.statusCode == 200) {
         if (codeController.text.isNotEmpty) {
           String mainString = response.body;
-          int pos = mainString.indexOf("nakli");
-          int post = mainString.indexOf("asli");
-          if (pos == mainString.indexOf("nakli")) {
-            showDialog<void>(
-              context: context,
-              barrierDismissible: false, // user must tap button!
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("OOP'S"),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                        Image.asset("assets/wrong.png"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 20, right: 20),
-                          child: Text(
-                            response.body,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+
+          if (response.body.contains('asli')) {
+            print("asli");
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: ListBody(
+                      children: [Text(response.body)],
                     ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => NoFound(
-                                        response: response.body,
-                                        phoneController: phoneController.text,
-                                      )));
-                        },
-                        child: Text("OK"))
-                  ],
-                );
-              },
-            );
-          } else if (post == mainString.indexOf("asli")) {
-            showDialog<void>(
-              context: context,
-              barrierDismissible: false, // user must tap button!
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Success"),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                        Image.asset("assets/check.png"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 20, right: 20),
-                          child: Text(
-                            response.body,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (builder) => NoFound(
+                                          response: response.body,
+                                          phoneController: phoneController.text,
+                                        )));
+                          },
+                          child: Text("OK"))
+                    ],
+                  );
+                });
+          } else if (response.body.contains('nakli')) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: ListBody(
+                      children: [Text(response.body)],
                     ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => NoFound(
-                                        response: response.body,
-                                        phoneController: phoneController.text,
-                                      )));
-                        },
-                        child: Text("OK"))
-                  ],
-                );
-              },
-            );
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (builder) => NoFound(
+                                          response: response.body,
+                                          phoneController: phoneController.text,
+                                        )));
+                          },
+                          child: Text("OK"))
+                    ],
+                  );
+                });
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(

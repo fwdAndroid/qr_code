@@ -98,7 +98,7 @@ class _NoFoundState extends State<NoFound> {
             margin: EdgeInsets.only(top: 30, left: 10, right: 10),
             child: Center(
               child: Text(
-                "Powered By: EcoWebPortals.com",
+                "EcoWebPortals.com",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                 textAlign: TextAlign.center,
               ),
@@ -116,7 +116,7 @@ class _NoFoundState extends State<NoFound> {
                     context, MaterialPageRoute(builder: (builder) => Splash()));
               },
               child: const Text(
-                'Home Page',
+                'Scan Again',
                 style: TextStyle(color: Colors.white),
               ),
             ),
